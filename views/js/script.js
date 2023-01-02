@@ -32,11 +32,11 @@ const searchPokemon = event => {
     const { value } = event.target.pokemon;
     fetch(`https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`)
         .then(data => data.json())
-        .then(response => renderPokemonData(response))
+        .then(response => renderPokeData(response))
         .catch(err => renderNotFound())
 }
 
-const renderPokemonData = data => {
+const renderPokeData = data => {
     const sprite =  data.sprites.front_default;
     const { stats, types } = data;
 
@@ -44,8 +44,8 @@ const renderPokemonData = data => {
     pokeImg.setAttribute('src', sprite);
     pokeId.textContent = `Nº ${data.id}`;
     setCardColor(types);
-    renderPokemonTypes(types);
-    renderPokemonStats(stats);
+    renderPokeTypes(types);
+    renderPokeStats(stats);
 }
 
 
@@ -56,7 +56,7 @@ const setCardColor = types => {
     pokeImg.style.backgroundSize = ' 5px 5px';
 }
 
-const renderPokemonTypes = types => {
+const renderPokeTypes = types => {
     pokeTypes.innerHTML = '';
     types.forEach(type => {
         const typeTextElement = document.createElement("div");
@@ -66,7 +66,7 @@ const renderPokemonTypes = types => {
     });
 }
 
-const renderPokemonStats = stats => {
+const renderPokeStats = stats => {
     pokeStats.innerHTML = '';
     stats.forEach(stat => {
         const statElement = document.createElement("div");
